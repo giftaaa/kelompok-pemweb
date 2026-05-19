@@ -16,9 +16,8 @@ Route::get('/layanan', function () {
     return view('public.layanan');
 })->name('layanan');
 
-Route::get('/kontak', function () {
-    return view('public.kontak');
-})->name('kontak');
+Route::get('/kontak', [KontakController::class, 'index'])->name('kontak');
+Route::post('/kontak', [KontakController::class, 'store'])->name('kontak.store');
 
 Route::get('/berita', [BeritaController::class, 'index'])->name('berita.index');
 Route::get('/berita/{slug}', [BeritaController::class, 'show'])->name('berita.show');
@@ -28,6 +27,8 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
     Route::get('/dashboard', function () {
         return view('admin.dashboard');
     })->name('dashboard');
+
+    Route::get('/kontak', [KontakController::class, 'adminIndex'])->name('kontak.index');
 
     Route::get('/berita', [BeritaController::class, 'adminIndex'])->name('berita.index');
     Route::get('/berita/create', [BeritaController::class, 'create'])->name('berita.create');
