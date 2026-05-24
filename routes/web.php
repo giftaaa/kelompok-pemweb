@@ -2,10 +2,12 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BeritaController;
+use App\Http\Controllers\KontakController;
 
 // ===== PUBLIC ROUTES =====
 Route::get('/', function () {
-    return view('public.home');
+    $beritas = \App\Models\Berita::latest()->take(3)->get();
+    return view('public.home', compact('beritas'));
 })->name('home');
 
 Route::get('/about', function () {
@@ -25,7 +27,10 @@ Route::get('/berita/{slug}', [BeritaController::class, 'show'])->name('berita.sh
 // ===== ADMIN ROUTES =====
 Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/dashboard', function () {
-        return view('admin.dashboard');
+        $totalBerita = \App\Models\Berita::count();
+        $totalKontak = \App\Models\Kontak::count();
+        $beritas = \App\Models\Berita::latest()->take(5)->get();
+        return view('admin.dashboard', compact('totalBerita', 'totalKontak', 'beritas'));
     })->name('dashboard');
 
     Route::get('/kontak', [KontakController::class, 'adminIndex'])->name('kontak.index');
