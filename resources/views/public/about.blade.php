@@ -39,7 +39,7 @@
         </p>
       </div>
       <div style="background: var(--gray-100); border-radius: var(--radius-lg); padding: 3rem; text-align: center;">
-        <div style="font-size: 5rem; margin-bottom: 1rem;">🚀</div>
+        <img src="{{ asset('images/logo_lunova.png') }}" alt="Lunova Logo" style="width: 150px; margin: 0 auto 1rem;">
         <h3 style="font-family: 'DM Serif Display', serif; font-size: 24px; margin-bottom: 0.5rem;">Lunova</h3>
         <p style="color: var(--gray-600); font-size: 14px;">Digital Agency · Jakarta, Indonesia</p>
       </div>
