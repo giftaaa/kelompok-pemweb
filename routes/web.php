@@ -24,6 +24,27 @@ Route::post('/kontak', [KontakController::class, 'store'])->name('kontak.store')
 Route::get('/berita', [BeritaController::class, 'index'])->name('berita.index');
 Route::get('/berita/{slug}', [BeritaController::class, 'show'])->name('berita.show');
 
+Route::post('/chat', function (\Illuminate\Http\Request $request) {
+    $userMessage = $request->input('message');
+    
+    $systemContext = "Kamu adalah Luna, AI assistant dari Lunova Digital Agency. Lunova adalah digital agency full-service yang berbasis di Jakarta, Indonesia. Layanan kami: Web Design & Development, Mobile App Development, Digital Marketing, dan Brand Identity. Email: hello@lunova.id. Jawab dalam Bahasa Indonesia, singkat, ramah, dan profesional. Jika ditanya di luar topik Lunova, arahkan kembali ke layanan kami.";
+    
+    $response = \Illuminate\Support\Facades\Http::post(
+        'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=' . env('GEMINI_API_KEY'),
+        [
+            'contents' => [[
+                'parts' => [[
+                    'text' => $systemContext . '\n\nUser: ' . $userMessage
+                ]]
+            ]]
+        ]
+    );
+    
+    $reply = $response->json()['candidates'][0]['content']['parts'][0]['text'] ?? 'Maaf, saya tidak bisa menjawab saat ini.';
+    
+    return response()->json(['reply' => $reply]);
+})->name('chat');
+
 // ===== ADMIN ROUTES =====
 Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/dashboard', function () {

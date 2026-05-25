@@ -150,7 +150,7 @@
     input.value = '';
     addTyping();
 
-    // 2. Logika Pintar Penjawab Otomatis (Simulator Luna AI)
+    // simulator AI
     let reply = "Maaf, Luna belum memahami pertanyaan itu. Luna bisa membantu menjelaskan tentang Layanan Lunova, Profil Tim, atau Kontak kami! 🌙";
 
     if (text.includes('halo') || text.includes('hai') || text.includes('p ') || text.includes('pagi') || text.includes('siang') || text.includes('malam')) {
