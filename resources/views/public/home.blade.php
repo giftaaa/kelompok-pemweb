@@ -4,7 +4,6 @@
 
 @section('content')
 
-  <!-- HERO -->
   <section class="hero">
     <div class="hero-inner">
       <div class="hero-badge">
@@ -41,7 +40,6 @@
     </div>
   </section>
 
-  <!-- STATS -->
   <section class="stats">
     <div class="stat-item">
       <div class="stat-num" data-target="87">0</div>
@@ -64,7 +62,6 @@
     </div>
   </section>
 
-  <!-- SERVICES -->
   <section class="section" id="services">
     <div class="section-header">
       <div>
@@ -108,7 +105,6 @@
     </div>
   </section>
 
-  <!-- BERITA TERBARU -->
   <section class="section" id="berita">
     <div class="section-header">
       <div>
@@ -120,7 +116,7 @@
     <div class="work-grid">
       @forelse($beritas ?? [] as $berita)
       <div class="work-card {{ $loop->first ? 'work-card--wide' : '' }}">
-        <div class="work-thumb" style="background: #EAF3DE;">
+        <div class="work-thumb" style="background: var(--gray-100); transition: background 0.3s ease;">
           @if($berita->gambar)
             <img src="{{ asset('storage/'.$berita->gambar) }}" style="width:100%; height:100%; object-fit:cover;">
           @else
@@ -143,7 +139,6 @@
     </div>
   </section>
 
-  <!-- PROCESS -->
   <section class="section" id="process">
     <div class="section-header">
       <div>

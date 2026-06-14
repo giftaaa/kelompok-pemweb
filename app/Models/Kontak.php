@@ -9,6 +9,7 @@ class Kontak extends Model
     protected $fillable = [
         'nama',
         'email',
+        'whatsapp',
         'subjek',
         'pesan',
     ];

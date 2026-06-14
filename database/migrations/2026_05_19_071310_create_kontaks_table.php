@@ -15,6 +15,7 @@ return new class extends Migration
         $table->id();
         $table->string('nama');
         $table->string('email');
+        $table->string('whatsapp');
         $table->string('subjek')->nullable();
         $table->text('pesan');
         $table->timestamps();

@@ -66,7 +66,8 @@
   </section>
 
   <!-- KENAPA PILIH KAMI -->
-  <section style="background: var(--gray-100); padding: 6rem 0;">
+  <!-- OPTIMALISASI: Ditambahkan transisi kelenturan warna background & border-top/bottom dinamis -->
+  <section style="background: var(--gray-100); padding: 6rem 0; border-top: 1px solid var(--gray-200); border-bottom: 1px solid var(--gray-200); transition: background 0.3s ease, border-color 0.3s ease;">
     <div class="section" style="padding-top: 0; padding-bottom: 0;">
       <div class="section-header">
         <div>
@@ -75,21 +76,26 @@
         </div>
       </div>
       <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem;">
-        <div style="background: var(--white); border-radius: var(--radius-lg); padding: 2rem; border: 1px solid var(--gray-200);">
+        
+        <!-- OPTIMALISASI: Ditambahkan transisi kelenturan warna pada semua box keunggulan -->
+        <div style="background: var(--white); border-radius: var(--radius-lg); padding: 2rem; border: 1px solid var(--gray-200); transition: background 0.3s ease, border-color 0.3s ease;">
           <div style="font-size: 2rem; margin-bottom: 1rem;">⚡</div>
           <h4 style="font-size: 16px; font-weight: 500; margin-bottom: 0.5rem;">Pengerjaan Cepat</h4>
           <p style="font-size: 14px; color: var(--gray-600); font-weight: 300; line-height: 1.7;">Kami berkomitmen menyelesaikan project tepat waktu tanpa mengorbankan kualitas.</p>
         </div>
-        <div style="background: var(--white); border-radius: var(--radius-lg); padding: 2rem; border: 1px solid var(--gray-200);">
+
+        <div style="background: var(--white); border-radius: var(--radius-lg); padding: 2rem; border: 1px solid var(--gray-200); transition: background 0.3s ease, border-color 0.3s ease;">
           <div style="font-size: 2rem; margin-bottom: 1rem;">🎯</div>
           <h4 style="font-size: 16px; font-weight: 500; margin-bottom: 0.5rem;">Hasil Terukur</h4>
           <p style="font-size: 14px; color: var(--gray-600); font-weight: 300; line-height: 1.7;">Setiap keputusan kami berbasis data untuk memastikan ROI yang maksimal bagi bisnis Anda.</p>
         </div>
-        <div style="background: var(--white); border-radius: var(--radius-lg); padding: 2rem; border: 1px solid var(--gray-200);">
+
+        <div style="background: var(--white); border-radius: var(--radius-lg); padding: 2rem; border: 1px solid var(--gray-200); transition: background 0.3s ease, border-color 0.3s ease;">
           <div style="font-size: 2rem; margin-bottom: 1rem;">🤝</div>
           <h4 style="font-size: 16px; font-weight: 500; margin-bottom: 0.5rem;">Support 24/7</h4>
           <p style="font-size: 14px; color: var(--gray-600); font-weight: 300; line-height: 1.7;">Tim kami siap membantu kapanpun Anda membutuhkan, bahkan setelah project selesai.</p>
         </div>
+
       </div>
     </div>
   </section>

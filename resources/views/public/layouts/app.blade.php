@@ -13,16 +13,42 @@
 </head>
 <body>
 
-  <!-- NAV -->
   <nav class="nav">
     <a href="{{ route('home') }}" class="nav-logo">lu<span>nova</span></a>
     <ul class="nav-links">
-      <li><a href="{{ route('home') }}">Home</a></li>
-      <li><a href="{{ route('about') }}">About</a></li>
-      <li><a href="{{ route('layanan') }}">Layanan</a></li>
-      <li><a href="{{ route('berita.index') }}">Berita</a></li>
-      <li><a href="{{ route('kontak') }}">Kontak</a></li>
+      <li>
+        <a href="{{ route('home') }}" style="font-weight: {{ request()->routeIs('home') ? '700' : '400' }};">
+      Home
+        </a>
+      </li>
+      <li>
+        <a href="{{ route('about') }}" style="font-weight: {{ request()->routeIs('about') ? '700' : '400' }};">
+      About
+        </a>
+      </li>
+      <li>
+        <a href="{{ route('layanan') }}" style="font-weight: {{ request()->routeIs('layanan') ? '700' : '400' }};">
+      Layanan
+        </a>
+      </li>
+      <li>
+        <a href="{{ route('berita.index') }}" style="font-weight: {{ request()->routeIs('berita.*') ? '700' : '400' }};">
+      Berita
+        </a>
+      </li>
+      <li>
+        <a href="{{ route('kontak') }}" style="font-weight: {{ request()->routeIs('kontak') ? '700' : '400' }};">
+      Kontak
+        </a>
+      </li>
     </ul>
+
+    <button id="dark-mode-toggle" aria-label="Toggle Dark Mode" style="
+      background: none; border: none; font-size: 20px; cursor: pointer; 
+      padding: 0 15px; transition: transform 0.2s; display: inline-flex; align-items: center;">
+      🌙
+    </button>
+
     <a href="{{ route('kontak') }}" class="nav-cta">Hubungi Kami</a>
     <button class="nav-burger" aria-label="Toggle menu">
       <span></span><span></span>
@@ -31,7 +57,6 @@
 
   @yield('content')
 
-  <!-- FOOTER -->
   <footer class="footer">
     <div class="footer-top">
       <div class="footer-brand">
@@ -63,7 +88,6 @@
   <script src="{{ asset('js/script.js') }}"></script>
   @yield('scripts')
 
-  <!-- CHATBOT BUBBLE -->
   <div id="chat-bubble" onclick="toggleChat()" style="
     position: fixed; bottom: 2rem; right: 2rem;
     width: 56px; height: 56px; border-radius: 50%;
@@ -82,7 +106,6 @@
     z-index: 9998; flex-direction: column; overflow: hidden;
     border: 1px solid #e8e8e2; font-family: 'DM Sans', sans-serif;">
 
-    <!-- Header -->
     <div style="background: #1a1a1a; padding: 1rem 1.25rem; display: flex; align-items: center; gap: 0.75rem;">
       <div style="width: 36px; height: 36px; background: #378ADD; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 16px;">🌙</div>
       <div>
@@ -91,14 +114,12 @@
       </div>
     </div>
 
-    <!-- Messages -->
     <div id="chat-messages" style="flex: 1; overflow-y: auto; padding: 1rem; display: flex; flex-direction: column; gap: 0.75rem; background: #fafaf8;">
       <div style="background: white; border: 1px solid #e8e8e2; border-radius: 12px 12px 12px 4px; padding: 0.75rem 1rem; font-size: 13px; color: #1a1a1a; max-width: 85%; line-height: 1.6;">
         Halo! Saya Luna, AI Assistant dari Lunova 🌙 Ada yang bisa saya bantu?
       </div>
     </div>
 
-    <!-- Input -->
     <div style="padding: 0.75rem; border-top: 1px solid #e8e8e2; display: flex; gap: 0.5rem; background: white;">
       <input id="chat-input" type="text" placeholder="Ketik pesan..." onkeypress="if(event.key==='Enter') sendMessage()"
         style="flex: 1; border: 1px solid #e8e8e2; border-radius: 100px; padding: 8px 14px; font-size: 13px; font-family: 'DM Sans', sans-serif; outline: none; color: #1a1a1a;" />
@@ -107,6 +128,32 @@
   </div>
 
 <script>
+  // ==========================================
+  // [TAMBAHAN] LOGIKA JAVASCRIPT DARK MODE
+  // ==========================================
+  const toggleBtn = document.getElementById('dark-mode-toggle');
+  const body = document.body;
+
+  // Cek local storage saat halaman di-load agar tema tidak mereset saat pindah page
+  if (localStorage.getItem('theme') === 'dark') {
+    body.classList.add('dark-mode');
+    toggleBtn.innerHTML = '☀️';
+  }
+
+  toggleBtn.addEventListener('click', () => {
+    body.classList.toggle('dark-mode');
+    if (body.classList.contains('dark-mode')) {
+      localStorage.setItem('theme', 'dark');
+      toggleBtn.innerHTML = '☀️';
+    } else {
+      localStorage.setItem('theme', 'light');
+      toggleBtn.innerHTML = '🌙';
+    }
+  });
+
+  // ==========================================
+  // LOGIKA CHATBOT LUNA
+  // ==========================================
   function toggleChat() {
     const box = document.getElementById('chat-box');
     const bubble = document.getElementById('chat-bubble');
@@ -146,12 +193,10 @@
     const text = input.value.trim().toLowerCase();
     if (!text) return;
 
-    // 1. Tampilkan pesan user
     addMessage(input.value.trim(), true);
     input.value = '';
     addTyping();
 
-    // simulator AI
     let reply = "Maaf, Luna belum memahami pertanyaan itu. Luna bisa membantu menjelaskan tentang Layanan Lunova, Profil Tim, atau Kontak kami! 🌙";
 
     if (text.includes('halo') || text.includes('hai') || text.includes('p ') || text.includes('pagi') || text.includes('siang') || text.includes('malam')) {
@@ -173,7 +218,6 @@
       reply = "Lunova Digital Agency berbasis di Jakarta, Indonesia. Untuk saat ini kami melayani klien secara remote maupun meeting langsung!";
     }
 
-    // 3. Efek animasi loading mengetik buatan (0.8 detik) agar terasa realistik seperti AI asli
     setTimeout(() => {
       document.getElementById('typing-indicator')?.remove();
       addMessage(reply, false);

@@ -19,6 +19,7 @@ class KontakController extends Controller
         $request->validate([
             'nama' => 'required',
             'email' => 'required|email',
+            'whatsapp' => 'required',
             'subjek' => 'nullable',
             'pesan' => 'required',
         ]);

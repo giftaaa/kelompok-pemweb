@@ -93,13 +93,48 @@
       font-size: 14px; margin-bottom: 1.5rem;
       border: 1px solid #C8E6C9;
     }
+
+    /* ========================================================
+       FITUR BALAS PESAN & MODAL SCROLLBAR CUSTOM (BARU)
+       ======================================================== */
+    .btn-action-email {
+      background: var(--blue) !important;
+      color: white !important;
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 500;
+      text-decoration: none;
+      display: inline-block;
+      transition: opacity 0.2s ease;
+    }
+    .btn-action-wa {
+      background: #25D366 !important;
+      color: white !important;
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 500;
+      text-decoration: none;
+      display: inline-block;
+      transition: opacity 0.2s ease;
+    }
+    .btn-action-email:hover, .btn-action-wa:hover {
+      opacity: 0.85;
+    }
+    #modalContent::-webkit-scrollbar {
+      width: 5px;
+    }
+    #modalContent::-webkit-scrollbar-thumb {
+      background: var(--gray-400);
+      border-radius: 10px;
+    }
   </style>
   @yield('styles')
 </head>
 <body>
 <div class="admin-wrap">
 
-  <!-- SIDEBAR -->
   <aside class="sidebar">
     <a href="{{ route('admin.dashboard') }}" class="sidebar-logo">lu<span>nova</span></a>
 
@@ -125,7 +160,6 @@
     </div>
   </aside>
 
-  <!-- MAIN CONTENT -->
   <main class="admin-main">
     @yield('content')
   </main>

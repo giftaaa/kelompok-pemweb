@@ -10,9 +10,10 @@ body {
   font-family: 'DM Sans', sans-serif;
   font-size: 16px;
   line-height: 1.6;
-  color: #1a1a1a;
-  background: #fafaf8;
+  color: var(--black); 
+  background: var(--white);
   overflow-x: hidden;
+  transition: background 0.3s ease, color 0.3s ease;
 }
 
 img { max-width: 100%; display: block; }
@@ -926,4 +927,326 @@ ul { list-style: none; }
   .footer-top { flex-direction: column; }
   .footer-links { flex-direction: column; gap: 2rem; }
   .process-item.open .process-body { padding-left: 2rem; }
+}
+/* ========================================================
+   INTERACTIVE DARK MODE ADJUSTMENTS (TARUH DI PALING BAWAH)
+   ======================================================== */
+
+/* 1. Pengalihan Variabel Warna Saat Dark Mode Aktif */
+body.dark-mode {
+  --black: #fafaf8;            /* Teks utama jadi terang */
+  --white: #121212;            /* Background utama jadi gelap */
+  --gray-100: #1a1a1a;         /* Background sekunder (marquee, hover) */
+  --gray-200: #2d2d2d;         /* Garis border / tepi */
+  --gray-400: #8a8a80;         /* Warna teks muted melayang */
+  --gray-600: #b0b0a8;         /* Warna deskripsi / teks sekunder */
+  --accent: #f4f4f0;
+}
+
+.nav, .service-card, .work-card, .process-toggle, .btn-outline, .footer {
+  transition: background 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+}
+
+/* 2. Penyesuaian Komponen Spesifik */
+body.dark-mode .nav {
+  background: rgba(18, 18, 18, 0.85); /* Efek blur kaca versi gelap */
+}
+
+body.dark-mode .nav-cta {
+  background: var(--black);
+  color: #121212;
+}
+
+body.dark-mode .nav-cta:hover {
+  background: #e8e8e2;
+}
+
+body.dark-mode .hero-badge {
+  background: #1a1a1a;
+}
+
+/* 3. Menyesuaikan Warna Menu Navigasi (Home, About, dll) */
+body.dark-mode .nav-links a {
+  color: var(--gray-600);
+}
+
+body.dark-mode .nav-links a:hover {
+  color: var(--black);
+}
+
+.nav-links a {
+  transition: color 0.3s ease;
+}
+
+/* 4. Penyesuaian Tampilan Komponen Kreatif (Mockup Box) */
+body.dark-mode .mock-browser,
+body.dark-mode .mock-phone,
+body.dark-mode .mock-card {
+  background: #1e1e1e;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+}
+
+body.dark-mode .mock-bar {
+  background: #252522;
+  border-bottom-color: #33332f;
+}
+
+body.dark-mode .mock-content {
+  background: repeating-linear-gradient(
+    transparent,
+    transparent 10px,
+    #252522 10px,
+    #252522 11px
+  );
+}
+
+body.dark-mode .mock-card-line {
+  background: #2d2d2d;
+}
+
+/* 5. Penyesuaian Responsif Menu Mobile */
+@media (max-width: 768px) {
+  body.dark-mode .nav-links.mobile-open {
+    background: #121212;
+    border-bottom-color: var(--gray-200);
+  }
+}
+
+/* 6. Widget Chatbot Luna (Anti-Gagal) */
+body.dark-mode #chat-box {
+  background: #1e1e1e !important;
+  border-color: var(--gray-200) !important;
+}
+
+body.dark-mode #chat-messages {
+  background: #121212 !important;
+}
+
+body.dark-mode #chat-messages > div:not([style*="background: rgb(26, 26, 26)"]) {
+  background: #2d2d2d !important;
+  color: var(--black) !important;
+  border-color: var(--gray-200) !important;
+}
+
+body.dark-mode #chat-input {
+  background: #2d2d2d !important;
+  color: var(--black) !important;
+  border-color: var(--gray-200) !important;
+}
+
+body.dark-mode .process-name {
+  color: var(--black); 
+}
+body.dark-mode .process-body p {
+  color: var(--gray-600); 
+}
+body.dark-mode .stat-divider {
+  background-color: var(--gray-200); 
+}
+
+body.dark-mode .service-card {
+  background: var(--white);
+  border-bottom-color: var(--gray-200);
+}
+body.dark-mode .service-num {
+  color: var(--gray-400);
+}
+body.dark-mode .service-card h3 {
+  color: var(--black); 
+}
+body.dark-mode .service-card p {
+  color: var(--gray-600);
+}
+.cta-section .section-tag.light {
+  color: var(--gray-600) !important;
+}
+
+.cta-section .cta-sub {
+  color: var(--gray-600) !important;
+}
+
+body.dark-mode .cta-section .section-tag.light {
+  color: var(--gray-400) !important; 
+}
+
+body.dark-mode .cta-section .cta-sub {
+  color: #b0b0a8 !important; 
+}
+/* ========================================================
+   RE-ENGINEERING CSS HALAMAN KONTAK (ANTI-SHADOW & AUTO-CONTRAST)
+   ======================================================== */
+
+/* Grid Tata Letak Utama */
+.custom-contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: 4rem;
+  align-items: start;
+}
+
+/* Sisi Kiri - Tipografi Dinamis */
+.custom-section-tag {
+  display: block;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--gray-600);
+  margin-bottom: 0.75rem;
+}
+.custom-contact-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(32px, 4.5vw, 48px);
+  font-weight: 400;
+  letter-spacing: -1.5px;
+  line-height: 1.05;
+  color: var(--black); /* Otomatis Hitam saat Light Mode, Putih saat Dark Mode */
+  margin-bottom: 1.25rem;
+}
+.custom-contact-title em {
+  font-style: italic;
+  color: var(--blue);
+}
+.custom-contact-sub {
+  font-size: 15px;
+  color: var(--gray-600);
+  margin-bottom: 2.5rem;
+  font-weight: 300;
+  line-height: 1.7;
+}
+
+/* List Informasi Detail */
+.custom-info-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  margin-bottom: 2rem;
+}
+.custom-info-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.custom-info-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--gray-400);
+}
+.custom-info-value {
+  font-size: 15px;
+  color: var(--black);
+  font-weight: 400;
+}
+
+/* WhatsApp Komponen */
+.wa-link {
+  color: #1D9E75 !important;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.wa-badge {
+  font-size: 11px;
+  background: rgba(29, 158, 181, 0.08);
+  padding: 2px 8px;
+  border-radius: 10px;
+}
+
+/* Wadah Peta (Google Maps) */
+.map-container {
+  width: 100%;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  border: 1px solid var(--gray-200);
+  background: var(--gray-100);
+  transition: all 0.3s ease;
+}
+
+/* Sisi Kanan - Struktur Form Komponen */
+.custom-contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+.custom-form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+.custom-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.custom-form-group label {
+  font-size: 12px;
+  color: var(--black);
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  font-weight: 500;
+}
+.custom-form-group input,
+.custom-form-group textarea {
+  background: var(--white);
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius-sm);
+  padding: 14px;
+  font-size: 14px;
+  color: var(--black);
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 400;
+  outline: none;
+  resize: none;
+  width: 100%;
+  transition: all 0.2s ease;
+}
+.custom-form-group input::placeholder,
+.custom-form-group textarea::placeholder {
+  color: var(--gray-400);
+}
+.custom-form-group input:focus,
+.custom-form-group textarea:focus {
+  border-color: var(--blue);
+  box-shadow: 0 0 0 3px rgba(55, 138, 221, 0.1);
+}
+
+/* Tombol Submit */
+.custom-form-submit {
+  background: var(--black);
+  color: var(--white);
+  border: none;
+  padding: 14px 32px;
+  border-radius: 100px;
+  font-size: 14px;
+  font-weight: 500;
+  font-family: 'DM Sans', sans-serif;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  align-self: flex-start;
+}
+.custom-form-submit:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+/* --- PENYESUAIAN KHUSUS DARK MODE (INVERSION FILTERS) --- */
+body.dark-mode .map-container {
+  filter: grayscale(1) invert(0.92) contrast(1.1);
+}
+body.dark-mode .custom-form-group input,
+body.dark-mode .custom-form-group textarea {
+  background: #222222 !important; /* Menjaga input box tetap gelap elegan saat dark mode */
+  border-color: #333333;
+}
+
+/* Responsive breakpoint */
+@media (max-width: 768px) {
+  .custom-contact-grid {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+  .custom-form-row {
+    grid-template-columns: 1fr;
+  }
 }
